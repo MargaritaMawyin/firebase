@@ -1,8 +1,7 @@
-import { Redirect, Route } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
-
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -21,22 +20,33 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import LoginView from './pages/LoginView';
+import dashboardView from './pages/dashboardView';
+import editProfileView from './pages/editProfileView';
+import SignOutView from './pages/signOutView';
+import publicProfileView from './pages/publicProfileView';
+import chooseUsernameView from './pages/chooseUsernameView';
 
 setupIonicReact();
 
 const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
+  <BrowserRouter>
+    <IonApp>
+      <IonReactRouter>
+        <IonRouterOutlet>
+          <Route exact path="/" component={Home } />
+          <Route path="/login" component={LoginView } />
+          <Route path="/dashboard" component={dashboardView } />
+          <Route path="/dashboard/profile" component={editProfileView } />
+          <Route path="/signout" component={SignOutView } />          
+          <Route path="/u/:username" component={publicProfileView } />
+          <Route path="/choose-username" component={chooseUsernameView } />
+
+        </IonRouterOutlet>
+      </IonReactRouter>
+    </IonApp>
+  </BrowserRouter>
+
 );
 
 export default App;
